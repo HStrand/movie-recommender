@@ -1,7 +1,5 @@
 import numpy as np
-import matplotlib
 from matplotlib import pyplot
-from pylab import *
 import pandas
 from pandas import HDFStore
 
@@ -9,11 +7,11 @@ from pandas import HDFStore
 def sgd(R,Theta,X,K,iterations = 1000000, alpha=0.0005, beta=0.02):
     errors = []
     ploterrors = []
-    X = X.T
+    X = X.T # Transpose movie feature matrix to be conformable in dot products
     for iter in range(iterations):
         if (iter+1)%100000 == 0:
             print("Starting iteration", iter+1)
-            emean = np.mean(errors[iter-100000:])
+            emean = np.mean(errors[iter-99999:]) # Hack to avoid indexing error at first 100k checkpoint
             print("Moving average error:", emean)
             ploterrors.append(emean)
         try:
@@ -27,7 +25,7 @@ def sgd(R,Theta,X,K,iterations = 1000000, alpha=0.0005, beta=0.02):
             Theta[i,:] +=  alpha*(2*eij*X[:,j] - beta*Theta[i,:])  # Adjust user features
             X[:,j] +=  alpha*(2*eij*Theta[i,:] - beta*X[:,j])  # Adjust movie features
 
-            e += pow(fasit - Theta[i,:].dot(X[:,j]), 2)  # Compute error again for plotting purposes
+            e += pow(fasit - Theta[i,:].dot(X[:,j]), 2)  # Compute squared error for plotting purposes
             errors.append(e)
         except MemoryError:
             print("memory error")
