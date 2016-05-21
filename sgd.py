@@ -6,7 +6,7 @@ import pandas
 from pandas import HDFStore
 
 
-def SGD(R,Theta,X,K,iterations=1000000, alpha=0.0005, beta=0.02):
+def sgd(R,Theta,X,K,iterations = 1000000, alpha=0.0005, beta=0.02):
     errors = []
     ploterrors = []
     X = X.T
@@ -35,7 +35,7 @@ def SGD(R,Theta,X,K,iterations=1000000, alpha=0.0005, beta=0.02):
     return Theta, X.T, ploterrors
 
 
-def learn():
+def learn(iterations=1000000):
     print("Loading HDF5 file...")
     store = HDFStore('ratings.h5')
     R = store['r100k']
@@ -50,7 +50,7 @@ def learn():
     X = np.random.rand(M+1, K)
 
     print("Starting Stochastic Gradient Descent...")
-    nTheta, nX, errors = SGD(R, Theta, X, K)
+    nTheta, nX, errors = sgd(R, Theta, X, K, iterations)
 
     pyplot.figure(figsize=(10, 6))
     pyplot.plot(errors)
@@ -61,7 +61,8 @@ def learn():
     return nTheta, nX, errors
 
 
-def predict(user, movie, Theta, X_transpose):
+def predict(user, movie, Theta, X):
+    X = X.T
     rating = Theta[user,:].dot(X[:,movie])
     print("Prediction for user", user, "movie", movie, ":", rating)
     return rating
