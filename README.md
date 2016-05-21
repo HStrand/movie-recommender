@@ -20,7 +20,7 @@ The learn() function collects a dataset from the HDF5 binary store ratings.h5. A
 
 **Example usage**
 
-`Theta, X, errors = learn()` runs an experiment.
+`Theta, X, errors = learn()` runs an experiment and stores the learned features and loss function.
 
 
 
@@ -54,9 +54,9 @@ The core Stochastic Gradient Descent function, called by learn().
 
 1. R - a ratings matrix of type pandas.DataFrame with the columns 'userId', 'movieId' and 'rating'.
 
-2. Theta - matrix containing randomly initialized movie features
+2. Theta - a matrix containing randomly initialized user features
 
-3. X - matrix containing randomly initialized movie features
+3. X - a matrix containing randomly initialized movie features
 
 4. K - number of features
 
