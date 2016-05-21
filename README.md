@@ -1,4 +1,4 @@
-# Social movie recommender app.
+# Social movie recommender app
 
 The script sgd.py runs a matrix factorization algorithm that is optimized through Stochastic Gradient Descent.
 
@@ -7,7 +7,8 @@ The script sgd.py runs a matrix factorization algorithm that is optimized throug
 Open a Python (3.x) console and import the module with `from sgd import *`. Run experiments with the learn() function and predict movie ratings with the predict() function.
 
 
-### Function learn()
+
+### learn()
 
 Runs an experiment.
 
@@ -22,7 +23,8 @@ The learn() function collects a dataset from the HDF5 binary store ratings.h5. A
 `Theta, X, errors = learn()` runs an experiment.
 
 
-### Function predict()
+
+### predict()
 
 Predicts a movie rating.
 
@@ -43,7 +45,8 @@ Theta and X are here the output from the learn function, where Theta is the matr
 `predict(1, 1, Theta, X)` predicts the rating user 1 will give to movie 1.
 
 
-### Function sgd()
+
+### sgd()
 
 The core Stochastic Gradient Descent function, called by learn().
 
