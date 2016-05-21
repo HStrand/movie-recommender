@@ -64,3 +64,38 @@ def predict(user, movie, Theta, X):
     rating = Theta[user,:].dot(X[:,movie])
     print("Prediction for user", user, "movie", movie, ":", rating)
     return rating
+
+
+def compute_user_averages(R):
+    num = max(R['userId'])+1
+    avg_user_ratings = [0]*num
+    for i in range(num):
+        avg_user_ratings[i] = (np.mean(R['rating'][R['userId']==i]))
+    return avg_user_ratings
+
+
+def compute_movie_averages(R):
+    num = max(R['movieId'])+1
+    avg_movie_ratings = [0]*num
+    for i in range(num):
+        avg_movie_ratings[i] = (np.mean(R['rating'][R['movieId']==i]))
+    return avg_movie_ratings
+
+
+def remove_nans(list):
+    for i in range(len(list)):
+        if(str(list[i])=='nan'):
+            list[i] = 0
+
+def normalize(R, movie_avgs, usereffects):
+    pandas.options.mode.chained_assignment = None # Allow assignment back to R
+    normalized = []
+    for i in range(len(R)):
+        R['rating'][i] -= (movie_avgs[0][R['movieId'][i]] + usereffects[0][R['userId'][i]])
+
+
+def predict_normalized(user, movie, Theta, X, movie_avg, usereffect):
+    X = X.T
+    rating = movie_avg + usereffect + Theta[user,:].dot(X[:,movie])
+    print("Prediction for user", user, "movie", movie, ":", rating)
+    return rating
