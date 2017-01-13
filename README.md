@@ -1,6 +1,6 @@
 # Social movie recommender app
 
-The script sgd.py runs a matrix factorization algorithm that is optimized through Stochastic Gradient Descent.
+The script sgd.py runs a collaborative filtering algorithm that is optimized through Stochastic Gradient Descent.
 
 ### Quickstart
 
